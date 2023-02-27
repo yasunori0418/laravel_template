@@ -7,6 +7,10 @@
 テンプレートからリポジトリ作成後、作成したリポジトリをクローンして以下のコマンドを実行してください。
 
 ```bash
-docker compose up -d
-docker comopse exec composer install
+bash ./starter.sh
 ```
+
+このスクリプトの実行で、以下の処理が実行されます。
+* コンテナの立ち上げ
+* パーミッションの変更
+* `composer install`の実行
