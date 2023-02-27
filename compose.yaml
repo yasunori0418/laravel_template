@@ -1,0 +1,11 @@
+---
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Docker/app/Dockerfile
+    container_name: php-fpm
+    volumes:
+      - type: bind
+        source: ./src
+        target: /var/www/html
