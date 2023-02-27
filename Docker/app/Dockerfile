@@ -18,7 +18,9 @@ RUN apt-get update \
 # composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Laravelアプリケーションファイルのコピー
-COPY ./src /var/www/html
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
+# ディレクトリを移動
 WORKDIR /var/www/html
+
+COPY ./src /var/www/html
