@@ -19,13 +19,12 @@ RUN apt-get update \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Laravelアプリケーションファイルのコピー
-COPY . /var/www/html
-
-# Laravelアプリケーションの依存関係をインストールする
-
-
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage
+COPY ./src /var/www/html
 
 WORKDIR /var/www/html
+
+# Laravelアプリケーションの依存関係をインストールする
+RUN composer install --prefer-dist --no-scripts --no-progress --no-suggest \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage
