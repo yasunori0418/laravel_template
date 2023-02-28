@@ -22,5 +22,3 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # ディレクトリを移動
 WORKDIR /var/www/html
-
-COPY ./src /var/www/html
