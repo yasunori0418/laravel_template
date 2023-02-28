@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Docker/app/Dockerfile
-    container_name: php-fpm
+    container_name: app
     volumes:
       - type: bind
         source: ./src
