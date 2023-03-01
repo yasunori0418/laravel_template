@@ -28,6 +28,9 @@ services:
       - type: bind
         source: ./Docker/web/default.conf
         target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: ./src
+        target: /var/www/html
     networks:
       - backend
 
