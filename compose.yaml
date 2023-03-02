@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: ./Docker/app/Dockerfile
       args:
+        # default php:8.1-fpm
         version: 8.1
     container_name: app
     environment:

@@ -17,3 +17,5 @@ bash ./starter.sh '9.*'
 * Laravelプロジェクト内の一部ディレクトリのパーミッション変更
 
 スクリプト実行後は、`localhost:8080`にアクセスすると、ブラウザで動作のプロジェクトの動作を確認できます。
+
+デフォルトでは`php:8.1-fpm`ですが、`compose.yaml`内の`services.app.build.args.version`の値を変更することで、phpのバージョンを変更可能です。
