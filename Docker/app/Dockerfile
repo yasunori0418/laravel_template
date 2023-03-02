@@ -19,6 +19,3 @@ RUN apt-get update \
 
 # composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# ディレクトリを移動
-WORKDIR /var/www/html
