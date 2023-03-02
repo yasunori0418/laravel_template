@@ -8,6 +8,8 @@ services:
     environment:
       TZ: Asia/Tokyo
       COMPOSER_ALLOW_SUPERUSER: 1
+    depends_on:
+      - db
     volumes:
       - type: bind
         source: ./src
@@ -33,6 +35,32 @@ services:
         target: /var/www/html
     networks:
       - backend
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
+    volumes:
+      - type: volume
+        source: laravel-data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./Docker/db/my.conf
+        target: /etc/my.conf
+    networks:
+      - backend
+
+
+volumes:
+  laravel-data:
 
 networks:
   backend:
