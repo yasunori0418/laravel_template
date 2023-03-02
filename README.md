@@ -1,13 +1,14 @@
 # Laravel Template
 
-`laravel 9.*`用の開発環境用のテンプレートです
+dockerによる`laravel`開発環境のテンプレートです
 
 ## Usage
 
 テンプレートからリポジトリ作成後、作成したリポジトリをクローンして以下のコマンドを実行してください。
 
 ```bash
-bash ./starter.sh
+# Laravel 9.*を構築する場合
+bash ./starter.sh '9.*'
 ```
 
 このスクリプトの実行で、以下の処理が実行されます。
