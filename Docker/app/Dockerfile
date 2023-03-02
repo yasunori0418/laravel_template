@@ -9,6 +9,8 @@ RUN apt-get update \
         zip \
         unzip \
         libzip-dev \
+        iputils-ping \
+        net-tools \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         bcmath \
@@ -17,8 +19,6 @@ RUN apt-get update \
 
 # composerのインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # ディレクトリを移動
 WORKDIR /var/www/html

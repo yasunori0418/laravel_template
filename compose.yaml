@@ -5,6 +5,11 @@ services:
       context: .
       dockerfile: ./Docker/app/Dockerfile
     container_name: app
+    environment:
+      TZ: ${TIME_ZONE}
+      COMPOSER_ALLOW_SUPERUSER: 1
+    depends_on:
+      - db
     volumes:
       - type: bind
         source: ./src
@@ -13,21 +18,48 @@ services:
       - backend
 
   web:
-    image: nginx:1.22
+    image: nginx:${NGINX_TAG}
     container_name: web
+    environment:
+      TZ: ${TIME_ZONE}
     ports:
-      - 8080:80
+      - ${LOCAL_PORT}:80
     depends_on:
       - app
     volumes:
       - type: bind
-        source: ./src
-        target: /var/www/html
-      - type: bind
         source: ./Docker/web/default.conf
         target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: ./src
+        target: /var/www/html
     networks:
       - backend
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      TZ: ${TIME_ZONE}
+    volumes:
+      - type: volume
+        source: laravel-data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./Docker/db/my.conf
+        target: /etc/my.conf
+    networks:
+      - backend
+
+
+volumes:
+  laravel-data:
 
 networks:
   backend:
