@@ -6,7 +6,7 @@ services:
       dockerfile: ./Docker/app/Dockerfile
     container_name: app
     environment:
-      TZ: Asia/Tokyo
+      TZ: ${TIME_ZONE}
       COMPOSER_ALLOW_SUPERUSER: 1
     depends_on:
       - db
@@ -18,12 +18,12 @@ services:
       - backend
 
   web:
-    image: nginx:1.22
+    image: nginx:${NGINX_TAG}
     container_name: web
     environment:
-      TZ: Asia/Tokyo
+      TZ: ${TIME_ZONE}
     ports:
-      - 8080:80
+      - ${LOCAL_PORT}:80
     depends_on:
       - app
     volumes:
@@ -42,12 +42,12 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
-      MYSQL_DATABASE: laravel
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      TZ: Asia/Tokyo
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      TZ: ${TIME_ZONE}
     volumes:
       - type: volume
         source: laravel-data
