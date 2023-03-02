@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: ./Docker/app/Dockerfile
+      args:
+        version: 8.1
     container_name: app
     environment:
       TZ: ${TIME_ZONE}

@@ -1,4 +1,5 @@
-FROM php:8.1-fpm
+ARG version
+FROM php:${version}-fpm
 
 # コンテナ内の更新と必要パッケージのインストール
 RUN apt-get update \
