@@ -9,6 +9,8 @@ RUN apt-get update \
         zip \
         unzip \
         libzip-dev \
+        iputils-ping \
+        net-tools \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
         bcmath \
